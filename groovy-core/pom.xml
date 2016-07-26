@@ -11,7 +11,7 @@
 
     <artifactId>groovy-mvn-spring-demo-core</artifactId>
     <packaging>jar</packaging>
-    <name>demo-core</name>
+    <name>groovy-core</name>
 
     <dependencies>
         <dependency>
