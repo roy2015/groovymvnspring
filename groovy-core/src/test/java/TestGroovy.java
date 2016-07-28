@@ -1,8 +1,13 @@
+import com.roy.v8.bill.MyBasicScript;
 import com.roy.v8.bill.ScriptService;
 import groovy.lang.Binding;
+import groovy.lang.GroovyShell;
+import groovy.lang.Script;
 import groovy.util.GroovyScriptEngine;
 import groovy.util.ResourceException;
 import groovy.util.ScriptException;
+import org.codehaus.groovy.control.CompilerConfiguration;
+import org.codehaus.groovy.runtime.powerassert.SourceText;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +76,18 @@ public class TestGroovy {
         } catch (ScriptException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void test4(){
+        CompilerConfiguration cfg = new CompilerConfiguration();
+//        cfg.setScriptBaseClass();
+        cfg.setScriptBaseClass(MyBasicScript.class.getName());
+        GroovyShell shell = new GroovyShell(cfg);
+
+//        Script script = shell.parse("(pow(3,2)+8 )% 3");
+        Script script = shell.parse("  500/(8-3)-2*2-1-custOp1(3.0,2)+8%3");
+        System.out.println(script.run());
     }
 
 }
