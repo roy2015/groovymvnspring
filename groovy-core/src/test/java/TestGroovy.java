@@ -86,8 +86,10 @@ public class TestGroovy {
         GroovyShell shell = new GroovyShell(cfg);
 
 //        Script script = shell.parse("(pow(3,2)+8 )% 3");
-        Script script = shell.parse("  500/(8-3)-2*2-1-custOp1(3.0,2)+8%3");
+        Script script1 = shell.parse("  500/(8-3)-2*2-1-custOp1(3.0,2)+8%3");
+        Script script = shell.parse("  (3+5) >2 || (1==1)");
         System.out.println(script.run());
+        System.out.println(script1.run());
     }
 
 }
