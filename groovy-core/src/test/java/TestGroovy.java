@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -89,7 +91,43 @@ public class TestGroovy {
         Script script1 = shell.parse("  500/(8-3)-2*2-1-custOp1(3.0,2)+8%3");
         Script script = shell.parse("  (3+5) >2 || (1==1)");
         System.out.println(script.run());
-        System.out.println(script1.run());
+        System.out.println(script1.run().getClass());
+    }
+
+    @Test
+    public void test5(){
+        long begin =0;
+        CompilerConfiguration cfg = new CompilerConfiguration();
+        GroovyShell shell = new GroovyShell(cfg);
+        Script script;
+        for (int i=0; i<1; i++) {
+            begin =System.currentTimeMillis();
+
+            script = shell.parse("  0.34 * 120.0");
+            System.out.println(script.run());
+            System.out.println(script.run().getClass());
+            System.out.println(System.currentTimeMillis()  - begin);
+        }
+    }
+
+    @Test
+    public void test6() throws javax.script.ScriptException {
+        long begin =0;
+        ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
+        ScriptEngine nashorn = scriptEngineManager.getEngineByName("JavaScript");
+        for (int i=0; i<1; i++) {
+            begin =System.currentTimeMillis();
+
+            System.out.println("\n"+nashorn.eval("  0.34 * 120.0"));
+            System.out.println(nashorn.eval("  0.34 * 120.0").getClass());
+            System.out.println(System.currentTimeMillis()  - begin);
+        }
+    }
+
+    @Test
+    public void test7() throws javax.script.ScriptException {
+        test5();
+        test6();
     }
 
 }
