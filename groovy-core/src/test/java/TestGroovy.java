@@ -13,6 +13,11 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import parsii.eval.Expression;
+import parsii.eval.Parser;
+import parsii.eval.Scope;
+import parsii.eval.Variable;
+import parsii.tokenizer.ParseException;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -94,40 +99,67 @@ public class TestGroovy {
         System.out.println(script1.run().getClass());
     }
 
-    @Test
-    public void test5(){
+
+    public void testGroovyEngineExpr(int times, String str){
         long begin =0;
         CompilerConfiguration cfg = new CompilerConfiguration();
         GroovyShell shell = new GroovyShell(cfg);
         Script script;
-        for (int i=0; i<1; i++) {
-            begin =System.currentTimeMillis();
+        Object res;
+        begin =System.currentTimeMillis();
+        for (int i=0; i<times; i++) {
 
-            script = shell.parse("  0.34 * 120.0");
-            System.out.println(script.run());
-            System.out.println(script.run().getClass());
-            System.out.println(System.currentTimeMillis()  - begin);
+            script = shell.parse(str);
+            res =  script.run();
+//            System.out.println(script.run());
+//            System.out.println(script.run().getClass());
         }
+        System.out.println(System.currentTimeMillis()  - begin);
     }
 
-    @Test
-    public void test6() throws javax.script.ScriptException {
+    public void testJsEngineExpr(int times, String str) throws javax.script.ScriptException {
         long begin =0;
         ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
         ScriptEngine nashorn = scriptEngineManager.getEngineByName("JavaScript");
-        for (int i=0; i<1; i++) {
-            begin =System.currentTimeMillis();
-
-            System.out.println("\n"+nashorn.eval("  0.34 * 120.0"));
-            System.out.println(nashorn.eval("  0.34 * 120.0").getClass());
-            System.out.println(System.currentTimeMillis()  - begin);
+        Object res;
+        begin =System.currentTimeMillis();
+        for (int i=0; i<times; i++) {
+              res = nashorn.eval(str);
+//            System.out.println("\n"+res);
+//            System.out.println(nashorn.eval("  0.34 * 120.0").getClass());
         }
+        System.out.println(System.currentTimeMillis()  - begin);
+    }
+
+    public void testParsiiExpr(int times, String str) throws ParseException {
+        Scope scope = Scope.create();
+        /*Variable a = scope.getVariable("a");
+        Expression expr = Parser.parse("3 + a * 4", scope);
+        a.setValue(4);
+        System.out.println(expr.evaluate());
+        a.setValue(5);
+        System.out.println(expr.evaluate());*/
+
+        long begin =0;
+        Expression expr;
+        double res;
+        begin =System.currentTimeMillis();
+        for (int i=0; i<times; i++) {
+
+            expr = Parser.parse(str);
+            res = expr.evaluate();
+//            System.out.println("\n"+res);
+//            System.out.println(expr.evaluate().getClass());
+        }
+        System.out.println(System.currentTimeMillis()  - begin);
+
     }
 
     @Test
-    public void test7() throws javax.script.ScriptException {
-        test5();
-        test6();
+    public void test7() throws Exception {
+        testGroovyEngineExpr(1, "  0.34 * 120.0+5/2");
+        testParsiiExpr(1,"  0.34 * 120.0+5/2");
+        testJsEngineExpr(1, "  0.34 * 120.0+5/2");
     }
 
 }
