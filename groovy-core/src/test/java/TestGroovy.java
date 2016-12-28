@@ -71,10 +71,10 @@ public class TestGroovy {
             String[] paths = {"D:/test/"};
             GroovyScriptEngine gse = new GroovyScriptEngine(paths);
 
-        Binding binding = new Binding();
-        Object[] path = {"E:/downloadpkgs"};
-        binding.setVariable("args",path);
-        gse.run("ListFile.groovy", binding);
+            Binding binding = new Binding();
+            Object[] path = {"E:/downloadpkgs"};
+            binding.setVariable("args",path);
+            gse.run("ListFile.groovy", binding);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -124,7 +124,7 @@ public class TestGroovy {
         Object res;
         begin =System.currentTimeMillis();
         for (int i=0; i<times; i++) {
-              res = nashorn.eval(str);
+            res = nashorn.eval(str);
 //            System.out.println("\n"+res);
 //            System.out.println(nashorn.eval("  0.34 * 120.0").getClass());
         }
