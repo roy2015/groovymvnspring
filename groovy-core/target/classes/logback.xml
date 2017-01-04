@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<configuration>
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${app.log.path:-C:\\}groovymvnspring.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${app.log.path:-C:\\}msg-socket.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %5p %-40logger{40}:%L[%t] - %m%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <appender name='CONSOLE' class='ch.qos.logback.core.ConsoleAppender'>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %5p %-40logger{40}:%L[%t] - %m%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <logger name='org.springframework' level="error" />
+    <logger name='demo' level="DEBUG" />
+    <root>
+        <level value='debug'/>
+        <!--<appender-ref ref='FILE'/>-->
+        <appender-ref ref='CONSOLE'/>
+    </root>
+</configuration>

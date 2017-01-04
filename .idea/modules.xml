@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/groovy-core/groovy-mvn-spring-demo-core.iml" filepath="$PROJECT_DIR$/groovy-core/groovy-mvn-spring-demo-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/groovymvnspring.iml" filepath="$PROJECT_DIR$/groovymvnspring.iml" />
+    </modules>
+  </component>
+</project>

@@ -19,8 +19,26 @@
         <lbs-version>0.0.9-SNAPSHOT</lbs-version>
         <common.biz-version>0.1.0</common.biz-version>
         <groovy.version>2.4.4</groovy.version>
+
+        <encoding>UTF-8</encoding>
+        <scala.tools.version>2.10</scala.tools.version>
+        <!-- Put the Scala version of the cluster -->
+        <scala.version>2.10.6</scala.version>
+
     </properties>
+
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <!--用来编译scala的-->
+                    <groupId>net.alchim31.maven</groupId>
+                    <artifactId>
+                        scala-maven-plugin</artifactId>
+                    <version>3.1.5</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

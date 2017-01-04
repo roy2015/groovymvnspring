@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:lang="http://www.springframework.org/schema/lang"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+       <!-- 通过component-scan自动装载Bean，简化配置 -->
+       <!--<context:component-scan base-package="me.joshua.demo4j.spring.groovy.first.service" />-->
+
+       <!-- 配置动态加载的Bean，基于Spring的Resource支持，可从本地文件获取Groovy代码 -->
+       <lang:groovy id="simple" refresh-check-delay="2000"
+                    script-source="file:/D:/test/SimpleScriptService.groovy" />
+
+</beans>

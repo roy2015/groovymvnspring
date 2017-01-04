@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="demo-core:war">
+    <output-path>$PROJECT_DIR$/demo-core/target</output-path>
+    <root id="archive" name="groovy-mvn-spring-demo-core-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="demo-core:war exploded" />
+    </root>
+  </artifact>
+</component>
