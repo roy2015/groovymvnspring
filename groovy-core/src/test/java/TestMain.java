@@ -14,7 +14,7 @@ public class TestMain {
      * 丢失精度
      */
     public static void test1(){
-        double k = 18.2 + 0.18 *30;
+        double k = 18.6 + 0.16 *30;
         BigDecimal bd = new BigDecimal(k);
         bd = bd.setScale(2, RoundingMode.HALF_UP);
         double d = bd.doubleValue();
